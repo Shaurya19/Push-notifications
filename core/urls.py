@@ -16,9 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from notification.consumer import NotificationConsumer
 from notification.views import notification_page_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", notification_page_view, name="notification_page"),
+]
+
+websocket_urlpatterns = [
+    path("ws/notifications/", NotificationConsumer.as_asgi())
 ]
